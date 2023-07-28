@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.fbbe07c6.css",
-    "main.js": "/static/js/main.430bf47c.js",
+    "main.js": "/static/js/main.1413f17d.js",
     "static/js/787.15102846.chunk.js": "/static/js/787.15102846.chunk.js",
     "static/media/TheJamsil2Light.ttf": "/static/media/TheJamsil2Light.27d300eb32a038239b8f.ttf",
     "service-worker.js": "/service-worker.js",
     "index.html": "/index.html",
     "main.fbbe07c6.css.map": "/static/css/main.fbbe07c6.css.map",
-    "main.430bf47c.js.map": "/static/js/main.430bf47c.js.map",
+    "main.1413f17d.js.map": "/static/js/main.1413f17d.js.map",
     "787.15102846.chunk.js.map": "/static/js/787.15102846.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fbbe07c6.css",
-    "static/js/main.430bf47c.js"
+    "static/js/main.1413f17d.js"
   ]
 }
