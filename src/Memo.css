@@ -1,0 +1,44 @@
+/* .Memolist{
+  padding: 1vh;
+  top:7vh;
+  height: 79vh;
+  margin: 0vh 0vh 1vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  font-family: 'TheJamsil2Light';
+} */
+
+.Memolist-entry {
+    display: flex;
+    flex-direction: row;
+    font-family: 'TheJamsil2Light';
+  }
+
+  .Memo-inputbox {
+    flex: 5;
+    border-bottom: 2px solid rgb(135, 135, 135);
+    font-family: 'TheJamsil2Light';
+  }
+  
+  .update-button {
+    flex: 1;
+    width: 1vh;
+    font-family: 'TheJamsil2Light';
+  }  
+  
+  .delete-button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:1vh;
+    font-family: 'TheJamsil2Light';
+  }
+  
+  .delete-button :hover {
+    opacity: 0.4;
+    padding: 6px 8px;
+    font-family: 'TheJamsil2Light';
+  }
+  
