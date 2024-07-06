@@ -20,6 +20,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { useCollection } from 'react-firebase-hooks/firestore';
 
+const apiKey = process.env.REACT_APP_GOOGLE_CALENDAR_KEY;
+
 const useStyles = makeStyles((theme) => ({
   reply: {
     position: 'relative',
@@ -50,7 +52,6 @@ export function Calendarpage() {
   meta.content = 'notranslate'
   document.getElementsByTagName('head')[0].appendChild(meta)
   
-  const apiKey = 'AIzaSyCO-dlypUiy1WqVKVKdkveQp-WxMYU7Mic';
   const EventRef = firestore.collection('calendar');
 
   const onCheckKey = (e) => {
