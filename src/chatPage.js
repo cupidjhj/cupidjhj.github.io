@@ -156,6 +156,7 @@ function OnlineStatus({ userId, myId, onReload }) {
         <a className="menu-item" href="/memo" style={{ textDecoration: "none" }}>📝 memo</a>
         <a className="menu-item" href="/calendar" style={{ textDecoration: "none" }}>📅 calendar</a>
         <a className="menu-item" href="/album" style={{ textDecoration: "none" }}>📷 album</a>
+        <a className="menu-item" href="/gallery" style={{ textDecoration: "none" }}>🖼️ gallery</a>
       </div>
     </div>
   );

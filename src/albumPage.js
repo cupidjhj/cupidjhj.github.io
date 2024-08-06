@@ -233,7 +233,7 @@ export function Albumpage () {
     bottomListRef.current.scrollIntoView({ behavior: 'smooth'});
   };
 
-  const k = firestore.collection('messages').orderBy('createdAt').limitToLast(1);
+  const k = firestore.collection('messages_new').orderBy('createdAt').limitToLast(1);
   const [date_check] = useCollection(k, { idField: 'id' });
 
   const reply = async (e) => {
@@ -251,7 +251,7 @@ export function Albumpage () {
       date_flag = false;
     }
     var vflag = selectedVideo?"video":"image";
-    await firestore.collection('messages').add({
+    await firestore.collection('messages_new').add({
         text: replyMessage,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         date_div:date_flag,
@@ -269,6 +269,18 @@ export function Albumpage () {
     setReplyMessage('');
     setTextIsOpen(false);
   };
+
+  const like = async (e) =>{
+    await firestore.collection('gallery').add({
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        isType:selectedVideo,
+        imageURL:selectedImage,
+      })
+
+      setReplyMessage('');
+      closeModal();
+  };
+
 
   const onCheckKey = (e) => {
     if(e.key === 'Enter') {
@@ -310,7 +322,10 @@ export function Albumpage () {
           <Link to="/">
           <div className='button_back'>⏪</div>
           </Link>
-          <div className='m' style={{ fontWeight: "bold", fontSize: "1.1rem"}}>Album</div>
+          <div className='m' style={{ fontWeight: "bold", fontSize: "1.1rem"}}>
+          <Link to="/gallery">
+          <div className='button_back'>💓ㅤ</div>
+          </Link>Album</div>
       </header>
       <div ref={containerRef} className="main_image" style={{ marginTop: `${marginTop}px` }}>
       <div className="image-grid">
@@ -340,6 +355,7 @@ export function Albumpage () {
           <img className={classes.img} src={selectedImage} style={{maxHeight:'500px'}} alt="Preview"/>}
           <br></br>
           <br></br>
+          <button onClick={(e)=>like()}><img height="25" src={'/icons/like.png'} alt="like"/></button>
           <button 
           style={{position:'fixed', bottom:"15px", right:"0px", backgroundColor:"#ffffff00"}}
           onClick={()=>textModalOpen()}><img height="25" src={'/icons/reply.png'} alt="reply"/></button>
@@ -357,7 +373,7 @@ export function Albumpage () {
             value={replyMessage}
             style={{ fontFamily: "TheJamsil2Light"}}
             onChange={(event) => setReplyMessage(event.target.value)}
-          />            
+          />        
         </div>
         <div className='reply_buttons'>
           <Button onClick={(e) => reply()} style={{ fontFamily: "TheJamsil2Light"}}> reply</Button>

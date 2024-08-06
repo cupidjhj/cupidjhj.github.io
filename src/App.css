@@ -745,6 +745,37 @@ video {
   background-color: #ffffff00;
 }
 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.-item {
+  position: relative;
+  width: 100%;
+
+}
+
+.gallery-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-item video_b{
+  height:auto;
+  background-color: #ffffff00;
+  cursor: pointer;
+}
+
 .filters {
   display: flex;
   justify-content: space-between;

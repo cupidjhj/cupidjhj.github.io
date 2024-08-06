@@ -3,6 +3,7 @@ import { MemoPage } from './memoPage';
 import { ChatPage } from './chatPage';
 import { Calendarpage } from './calendarPage';
 import { Albumpage } from './albumPage';
+import { Gallerypage } from './galleryPage';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route element={<MemoPage/>} path="/memo" exact />
           <Route element={<Calendarpage/>} path="/calendar" exact />
           <Route element={<Albumpage/>} path="/album" exact />
+          <Route element={<Gallerypage/>} path="/gallery" exact />
         </Routes>
    </BrowserRouter>
   </div>
