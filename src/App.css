@@ -758,7 +758,6 @@ video {
   left: 0;
   right: 0;
   top: 0;
-  height: 90vh;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 5px;
