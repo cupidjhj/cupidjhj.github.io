@@ -191,7 +191,7 @@ export function Gallerypage () {
           <div className='button_back'>📷ㅤ</div>
           </Link>Gallery</div>
       </header>
-      <div ref={containerRef} className="main_image" style={{ marginTop: `${marginTop}px` }}>
+      <div ref={containerRef} className="main_image">
       <div className="gallery-grid">
           {images && images.map(image =>
           <div key = {image.id} className="gallery-item">

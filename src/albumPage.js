@@ -346,7 +346,7 @@ export function Albumpage () {
           <div className='button_back'>💓ㅤ</div>
           </Link>Album</div>
       </header>
-      <div ref={containerRef} className="main_image" style={{ marginTop: `${marginTop}px` }}>
+      <div ref={containerRef} className="main_image">
       <div className="image-grid">
           {images && images.map(image =>
           <div key={image.id} className="image-item">

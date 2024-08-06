@@ -68,43 +68,40 @@ export function MemoPage() {
             </Link>
             <div className='m' style={{ fontWeight: "bold", fontSize: "1.1rem"}}>MEMO</div>
         </header>
-            <div className='section_m'>
-            <form className="appInput" onSubmit={addMemo} >
-            <FormControl
-                fullWidth="true">
-              <InputLabel
-              color="error"
-              disableTypography
-              style={{ fontFamily: "TheJamsil2Light"}}
-              >
-              메모를 입력하세요 ♡
-              </InputLabel>
-              <Input
-                value={input}
-                onChange={(event) => {
-                  setInput(event.target.value);
-                }}
-              />
-            </FormControl>
-            <div className="add-button">
-              <Button
-                disabled={!input}
-                type="submit"
-                onClick={addMemo}
-                variant="contained"
-                color="primary"
-                fontFamily="TheJamsil2Light"
-              >
-                ➕
-              </Button>
-            </div>
-          </form>
-          <div className='main_memo'>
+        <div className='main_memo'>
               {texts && texts.docs.map(memos => <MemoList key={memos.id} memo={memos.data()} id={memos.id}/>)}
-          </div>
-            </div>
-
         </div>
+        <form className="appInput" onSubmit={addMemo} >
+          <FormControl
+              fullWidth="true">
+            <InputLabel
+            color="error"
+            disableTypography
+            style={{ fontFamily: "TheJamsil2Light"}}
+            >
+            메모를 입력하세요 ♡
+            </InputLabel>
+            <Input
+              value={input}
+              onChange={(event) => {
+                setInput(event.target.value);
+              }}
+            />
+          </FormControl>
+          <div className="add-button">
+            <Button
+              disabled={!input}
+              type="submit"
+              onClick={addMemo}
+              variant="contained"
+              color="primary"
+              fontFamily="TheJamsil2Light"
+            >
+              ➕
+            </Button>
+          </div>
+        </form>
+      </div>
     );
 }
 
