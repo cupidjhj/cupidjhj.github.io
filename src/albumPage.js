@@ -336,7 +336,7 @@ export function Albumpage () {
 
 
   return (
-  <div className="App">
+  <>
       <header style={{ paddingLeft: "10px", paddingRight: "15px"}}>
           <Link to="/">
           <div className='button_back'>⏪</div>
@@ -411,7 +411,7 @@ export function Albumpage () {
       <img height="30" src={'/icons/load.png'} alt="load"/>
       </button>
       <ImageUploader onImageUpload={handleImageUpload} />
-  </div>
+  </>
   );
 }
 

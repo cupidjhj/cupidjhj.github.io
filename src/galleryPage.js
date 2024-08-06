@@ -181,7 +181,7 @@ export function Gallerypage () {
 
 
   return (
-  <div className="App">
+  <>
       <header style={{ paddingLeft: "10px", paddingRight: "15px"}}>
           <Link to="/">
           <div className='button_back'>⏪</div>
@@ -235,7 +235,7 @@ export function Gallerypage () {
       <button className="image-load" style={{bottom:"2vh"}} onClick={loadMoreImages}> 
       <img height="30" src={'/icons/load.png'} alt="load"/>
       </button>
-  </div>
+  </>
   );
 }
 

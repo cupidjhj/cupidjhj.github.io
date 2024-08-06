@@ -60,8 +60,7 @@ export function MemoPage() {
     };
   }, []);
   
-    return (
-      <div className="App">
+    return (<>
         <header style={{ paddingLeft: "10px", paddingRight: "15px"}}>
             <Link to="/">
             <div className='button_back'>⏪</div>
@@ -100,8 +99,7 @@ export function MemoPage() {
               ➕
             </Button>
           </div>
-        </form>
-      </div>
+        </form></>
     );
 }
 
