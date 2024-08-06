@@ -27,13 +27,16 @@ export function Gallerypage () {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [imageId, setImageId] = useState(null);
+  const [originalimageId, setOriginalimageId] = useState(null);
+  
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const openModal = (imageURL, isType, id) => {
+  const openModal = (imageURL, isType, id, original) => {
     setSelectedImage(imageURL);
     setSelectedVideo(isType);
     setImageId(id);
+    setOriginalimageId(original);
     setModalIsOpen(true);
   };
 
@@ -41,6 +44,7 @@ export function Gallerypage () {
     setSelectedImage(null);
     setSelectedVideo(null);
     setImageId(null);
+    setOriginalimageId(null);
     setModalIsOpen(false);
   };
 
@@ -85,7 +89,7 @@ export function Gallerypage () {
       }
     }));
   const classes = useStyles();
-  const ITEMS_PER_PAGE = 4;
+  const ITEMS_PER_PAGE = 9;
   const bottomListRef = useRef();
 
   const [images, setImages] = useState([]);
@@ -156,6 +160,11 @@ export function Gallerypage () {
   const unlike = async (e) =>{
     if (window.confirm("갤러리에서 삭제할 거예요? 😥")) {
       await firestore.collection('gallery').doc(imageId).delete();
+      await firestore.collection('images').doc(originalimageId).set({
+        isLiked:false,
+      },
+      { merge: true }
+      );
       alert("삭제했어여 ❤️‍🩹");
     }
     else {
@@ -174,20 +183,23 @@ export function Gallerypage () {
           <Link to="/">
           <div className='button_back'>⏪</div>
           </Link>
-          <div className='m' style={{ fontWeight: "bold", fontSize: "1.1rem"}}>Gallery</div>
+          <div className='m' style={{ fontWeight: "bold", fontSize: "1.1rem"}}>
+          <Link to="/album">
+          <div className='button_back'>📷ㅤ</div>
+          </Link>Gallery</div>
       </header>
       <div ref={containerRef} className="main_image" style={{ marginTop: `${marginTop}px` }}>
       <div className="gallery-grid">
           {images && images.map(image =>
           <div key = {image.id} className="image-item">
             {image.isType?<>
-            <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageURL, image.isType, image.id)}>
+            <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId)}>
             <source src={image.imageURL}></source>
             </video>
             <div className='icon'>🎥</div>
             </>
             :<img src={image.imageURL} alt={image.id}
-              onClick={() => openModal(image.imageURL, image.isType, image.id)}/>}
+              onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId)}/>}
           </div>
           )}
       <span ref={bottomListRef}></span>

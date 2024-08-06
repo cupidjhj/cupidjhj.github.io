@@ -116,23 +116,29 @@ export function Albumpage () {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [textIsOpen, setTextIsOpen] = useState(false);
+  const [isLiked, setImageIsLiked] = useState(false);
 
+  const [imageId, setImageId] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const [replyMessage, setReplyMessage] = useState(null);
   const [date, setDate] = useState(null);
 
-  const openModal = (imageUrl, Ddate, uid) => {
+  const openModal = (imageUrl, Ddate, uid, id, isLiked) => {
     setSelectedImage(imageUrl);
     setSelectedVideo(uid);
     setDate(format(new Date(Ddate.seconds * 1000),'PP',{locale: ko}));
+    setImageId(id);
+    setImageIsLiked(isLiked);
     setModalIsOpen(true);
   };
   const closeModal = () => {
     setSelectedImage(null);
     setSelectedVideo(null);
     setDate(null);
+    setImageId(null);
+    setImageIsLiked(false);
     setModalIsOpen(false);
   };
 
@@ -194,25 +200,28 @@ export function Albumpage () {
 
   const fetchImages = async () => {
     setLoading(true);
-
+  
     try {
       const imagesRef = firestore.collection('images');
       let query = imagesRef.orderBy('createdAt', 'desc').limit(ITEMS_PER_PAGE);
-      
+  
       if (lastImage) {
         query = query.startAfter(lastImage);
       }
-
+  
       const snapshot = await query.get();
       const newImageInforms = [];
-
+  
       for (const doc of snapshot.docs) {
-        const imageInform = doc.data();
+        const imageInform = {
+          id: doc.id,
+          ...doc.data()
+        };
         newImageInforms.push(imageInform);
       }
-
+  
       setImages((prevImageInforms) => [...prevImageInforms, ...newImageInforms]);
-
+  
       if (snapshot.docs.length > 0) {
         const lastImageDoc = snapshot.docs[snapshot.docs.length - 1];
         setLastImage(lastImageDoc);
@@ -271,14 +280,23 @@ export function Albumpage () {
   };
 
   const like = async (e) =>{
+    console.log(imageId)
     await firestore.collection('gallery').add({
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         isType:selectedVideo,
         imageURL:selectedImage,
+        originalId:imageId,
       })
-
-      setReplyMessage('');
-      closeModal();
+    await firestore.collection('images').doc(imageId).set({
+      isLiked:true,
+    },
+    { merge: true }
+    );
+    
+    setReplyMessage('');
+    closeModal();
+    await timeout(1000);
+    window.location.reload();
   };
 
 
@@ -332,13 +350,13 @@ export function Albumpage () {
           {images && images.map(image =>
           <div key={image.id} className="image-item">
             {image.uid?<>
-            <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageUrl, image.createdAt, image.uid)}>
+            <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageUrl, image.createdAt, image.uid, image.id, image.isLiked)}>
             <source src={image.imageUrl}></source>
             </video>
             <div className='icon'>🎥</div>
             </>
             :<img src={image.imageUrl} alt={image.id}
-              onClick={() => openModal(image.imageUrl, image.createdAt, image.uid)}/>}
+              onClick={() => openModal(image.imageUrl, image.createdAt, image.uid, image.id, image.isLiked)}/>}
           </div>
           )}
       <span ref={bottomListRef}></span>
@@ -354,8 +372,9 @@ export function Albumpage () {
           </video>:
           <img className={classes.img} src={selectedImage} style={{maxHeight:'500px'}} alt="Preview"/>}
           <br></br>
-          <br></br>
-          <button onClick={(e)=>like()}><img height="25" src={'/icons/like.png'} alt="like"/></button>
+          {isLiked===false||!isLiked?
+          <button onClick={(e)=>like()}><img height="25" src={'/icons/like.png'} alt="like"/></button>:
+          <button><img height="25" src={'/icons/nonlike.png'} alt="nonlike"/></button>}
           <button 
           style={{position:'fixed', bottom:"15px", right:"0px", backgroundColor:"#ffffff00"}}
           onClick={()=>textModalOpen()}><img height="25" src={'/icons/reply.png'} alt="reply"/></button>
