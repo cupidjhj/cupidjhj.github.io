@@ -99,7 +99,7 @@ export function MemoPage() {
               </Button>
             </div>
           </form>
-          <div className='main_memo' style={{ marginTop: `${marginTop}px` }}>
+          <div className='main_memo'>
               {texts && texts.docs.map(memos => <MemoList key={memos.id} memo={memos.data()} id={memos.id}/>)}
           </div>
             </div>

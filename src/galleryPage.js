@@ -191,7 +191,7 @@ export function Gallerypage () {
       <div ref={containerRef} className="main_image" style={{ marginTop: `${marginTop}px` }}>
       <div className="gallery-grid">
           {images && images.map(image =>
-          <div key = {image.id} className="image-item">
+          <div key = {image.id} className="gallery-item">
             {image.isType?<>
             <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId)}>
             <source src={image.imageURL}></source>
