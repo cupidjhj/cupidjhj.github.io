@@ -280,12 +280,13 @@ export function Albumpage () {
   };
 
   const like = async (e) =>{
-    console.log(imageId)
+    const { uid } = auth.currentUser;
     await firestore.collection('gallery').add({
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         isType:selectedVideo,
         imageURL:selectedImage,
         originalId:imageId,
+        whoIs:uid
       })
     await firestore.collection('images').doc(imageId).set({
       isLiked:true,

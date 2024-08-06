@@ -760,7 +760,7 @@ video {
   grid-template-rows: repeat(3, 1fr);
   gap: 5px;
   width: 100%;
-  max-width: 600px;
+  max-width: 728px;
   overflow-y: auto;
 }
 

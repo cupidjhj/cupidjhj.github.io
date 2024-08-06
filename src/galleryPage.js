@@ -27,16 +27,18 @@ export function Gallerypage () {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [imageId, setImageId] = useState(null);
+  const [whoIs, setWhoIs] = useState(null);
   const [originalimageId, setOriginalimageId] = useState(null);
   
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const openModal = (imageURL, isType, id, original) => {
+  const openModal = (imageURL, isType, id, original, who) => {
     setSelectedImage(imageURL);
     setSelectedVideo(isType);
     setImageId(id);
     setOriginalimageId(original);
+    setWhoIs(who);
     setModalIsOpen(true);
   };
 
@@ -45,6 +47,7 @@ export function Gallerypage () {
     setSelectedVideo(null);
     setImageId(null);
     setOriginalimageId(null);
+    setWhoIs(null);
     setModalIsOpen(false);
   };
 
@@ -193,13 +196,13 @@ export function Gallerypage () {
           {images && images.map(image =>
           <div key = {image.id} className="gallery-item">
             {image.isType?<>
-            <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId)}>
+            <video preload='true' muted height={"100px"} onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId, image.whoIs)}>
             <source src={image.imageURL}></source>
             </video>
             <div className='icon'>🎥</div>
             </>
             :<img src={image.imageURL} alt={image.id}
-              onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId)}/>}
+              onClick={() => openModal(image.imageURL, image.isType, image.id, image.originalId, image.whoIs)}/>}
           </div>
           )}
       <span ref={bottomListRef}></span>
@@ -216,6 +219,9 @@ export function Gallerypage () {
           <img className={classes.img} src={selectedImage} style={{maxHeight:'500px'}} alt="Preview"/>}
           <br></br>
           <br></br>
+          {whoIs==="Z7mCYAOqVnYl1xPaG1ezgwECQ0D3"? 
+          <div className='show_reply' style={{position:'fixed', bottom:"1px", right:"3px"}}>Mandeuk's pick ♡</div>:
+          <div className='show_reply' style={{position:'fixed', bottom:"1px", right:"3px"}}>Dooboo's pick ♡</div>}
           <button onClick={(e) => unlike()}
           style={{position:'fixed', bottom:"15px", right:"0px", backgroundColor:"#ffffff00"}}
           ><img height="25" src={'/icons/likedelete.png'} alt="delete"/></button>
