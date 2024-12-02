@@ -163,7 +163,7 @@ export function Gallerypage () {
   const unlike = async (e) =>{
     if (window.confirm("갤러리에서 삭제할 거예요? 😥")) {
       await firestore.collection('gallery').doc(imageId).delete();
-      await firestore.collection('images').doc(originalimageId).set({
+      await firestore.collection('images_nop').doc(originalimageId).set({
         isLiked:false,
       },
       { merge: true }

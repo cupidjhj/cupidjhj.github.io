@@ -62,7 +62,7 @@ function ImageUploader({onImageUpload}) {
     const imagesRef = storageRef.child("images_nop");
     const imageRef = imagesRef.child(file.name);
 
-    const messagesRef = firestore.collection('images');
+    const messagesRef = firestore.collection('images_nop');
     imageRef.put(file).then((snapshot) => {
       snapshot.ref.getDownloadURL().then((downloadURL) => {
         messagesRef.add({
@@ -202,7 +202,7 @@ export function Albumpage () {
     setLoading(true);
   
     try {
-      const imagesRef = firestore.collection('images');
+      const imagesRef = firestore.collection('images_nop');
       let query = imagesRef.orderBy('createdAt', 'desc').limit(ITEMS_PER_PAGE);
   
       if (lastImage) {
@@ -288,7 +288,7 @@ export function Albumpage () {
         originalId:imageId,
         whoIs:uid
       })
-    await firestore.collection('images').doc(imageId).set({
+    await firestore.collection('images_nop').doc(imageId).set({
       isLiked:true,
     },
     { merge: true }

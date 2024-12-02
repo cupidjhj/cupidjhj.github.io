@@ -240,7 +240,7 @@ function SignIn() {
       const imagesRef = storageRef.child("images_nop");
       const imageRef = imagesRef.child(file.name);
 
-      const messagesRef = firestore.collection('images');
+      const messagesRef = firestore.collection('images_nop');
       imageRef.put(file).then((snapshot) => {
         snapshot.ref.getDownloadURL().then((downloadURL) => {
           onUpload(downloadURL, video);
