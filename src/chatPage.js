@@ -305,15 +305,15 @@ function SignIn() {
     let flag;
     const { uid } = auth.currentUser;
     const dates_check = cur_date =>{
-      var dates;
-      date_check.docs.map(date_ch => dates = date_ch.data().createdAt);
-      const temp_dates = format(new Date(dates.seconds * 1000), 'PP', {locale: ko});
-      if (cur_date !== temp_dates){
-        return cur_date;
-      }
-      else{
+      // var dates;
+      // date_check.docs.map(date_ch => dates = date_ch.data().createdAt);
+      // const temp_dates = format(new Date(dates.seconds * 1000), 'PP', {locale: ko});
+      // if (cur_date !== temp_dates){
+      //   return cur_date;
+      // }
+      // else{
         return false;
-      }
+      // }
     }
     const [time, setTime] = useState(0);
     useEffect(() => {
