@@ -59,7 +59,7 @@ function ImageUploader({onImageUpload}) {
 
   const handleUploadButtonClick = () => {
     const storageRef = storage.ref();
-    const imagesRef = storageRef.child("images");
+    const imagesRef = storageRef.child("images_nop");
     const imageRef = imagesRef.child(file.name);
 
     const messagesRef = firestore.collection('images');
@@ -242,7 +242,7 @@ export function Albumpage () {
     bottomListRef.current.scrollIntoView({ behavior: 'smooth'});
   };
 
-  const k = firestore.collection('messages_new').orderBy('createdAt').limitToLast(1);
+  const k = firestore.collection('messages_nop').orderBy('createdAt').limitToLast(1);
   const [date_check] = useCollection(k, { idField: 'id' });
 
   const reply = async (e) => {
@@ -260,7 +260,7 @@ export function Albumpage () {
       date_flag = false;
     }
     var vflag = selectedVideo?"video":"image";
-    await firestore.collection('messages_new').add({
+    await firestore.collection('messages_nop').add({
         text: replyMessage,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         date_div:date_flag,

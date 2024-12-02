@@ -237,7 +237,7 @@ function SignIn() {
   
     const handleUploadButtonClick = () => {
       const storageRef = storage.ref();
-      const imagesRef = storageRef.child("images");
+      const imagesRef = storageRef.child("images_nop");
       const imageRef = imagesRef.child(file.name);
 
       const messagesRef = firestore.collection('images');
@@ -291,7 +291,7 @@ function SignIn() {
     const [bottom, setBottom] = useState(false);
   
     const [user] = useAuthState(auth);
-    const messagesRef = firestore.collection('messages_new');
+    const messagesRef = firestore.collection('messages_nop');
     let query = messagesRef.orderBy('createdAt').limitToLast(300);
     const k = messagesRef.orderBy('createdAt').limitToLast(1);
   
@@ -506,7 +506,7 @@ function SignIn() {
   }
 
   async function isReadUpdate(id){
-    await firestore.collection('messages_new').doc(id).update({isRead:true});
+    await firestore.collection('messages_nop').doc(id).update({isRead:true});
   }
 
 const useStyles = makeStyles((theme) => ({
@@ -564,16 +564,16 @@ const useStyles = makeStyles((theme) => ({
     }
 
     const onReact_l = async (e)=> {
-      await firestore.collection('messages_new').doc(id).update({react:"👍"});
+      await firestore.collection('messages_nop').doc(id).update({react:"👍"});
     }
     const onReact_h = async (e)=> {
-      await firestore.collection('messages_new').doc(id).update({react:"❤️"});
+      await firestore.collection('messages_nop').doc(id).update({react:"❤️"});
     }
     const onReact_u = async (e)=> {
-      await firestore.collection('messages_new').doc(id).update({react:"😡"});
+      await firestore.collection('messages_nop').doc(id).update({react:"😡"});
     }
     const onReact_remove = async (e)=> {
-      await firestore.collection('messages_new').doc(id).update({react:false});
+      await firestore.collection('messages_nop').doc(id).update({react:false});
     }
 
     const onCheckKey = (e) => {
@@ -640,10 +640,10 @@ const useStyles = makeStyles((theme) => ({
       else
         flag=false;
       if (flag){
-        await firestore.collection('messages_new').doc(id).update({react:input});
+        await firestore.collection('messages_nop').doc(id).update({react:input});
       }
       else{
-        await firestore.collection('messages_new').add({
+        await firestore.collection('messages_nop').add({
           text: input,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           date_div:date_checks,
@@ -669,13 +669,13 @@ const useStyles = makeStyles((theme) => ({
 
     const handleRightClick = e => {
       e.preventDefault();
-      firestore.collection('messages_new').doc(id).update({react:"❤️"});
+      firestore.collection('messages_nop').doc(id).update({react:"❤️"});
       // if (window.confirm("삭제할 거예요? 😥")) {
       //   if (uid !== auth.currentUser.uid){
       //     alert("본인 것만 지울 수 있어여 😡");
       //   }
       //   else{
-          // firestore.collection('messages_new').doc(id).delete();
+          // firestore.collection('messages_nop').doc(id).delete();
       //     alert("삭제했어여 ❤️‍🩹");
       //   }
       // } else {
